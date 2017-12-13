@@ -6,79 +6,23 @@ using System.Reflection;
 
 // ReSharper disable All
 
-#region Classes
-/// <summary>
-///   Indicates that the marked method will be tested during unit tests.
-/// </summary>
-[AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-public sealed class TestAttribute : Attribute
-{
-    /// <summary>
-    ///   If <see langword="true" /> and the method fails, all following tests will be skipped,
-    ///   and an error will be immediately shown.
-    /// </summary>
-    public bool IsFatal { get; set; } = false;
-
-    /// <summary>
-    ///   If <see langword="true" />, the test will be considered failed unless it throws an exception.
-    /// </summary>
-    public bool ShouldFail { get; set; } = false;
-
-    /// <summary>
-    ///   If <see langword="true"/>, the test will be skipped.
-    /// </summary>
-    public bool Skip { get; set; } = false;
-
-    /// <summary>
-    ///   Gets the list of all the arguments to pass to the function when invoking it.
-    /// </summary>
-    public object[] Arguments { get; }
-
-    /// <summary>
-    ///   Indicates that the marked method will be tested during unit tests, providing the
-    ///   specified arguments.
-    /// </summary>
-    public TestAttribute(params object[] arguments)
-    {
-        Arguments = arguments;
-    }
-}
-
-/// <summary>
-///   Represents an exception encountered when an assertion proves to be false.
-/// </summary>
-public sealed class AssertionException : Exception
-{
-    /// <summary>
-    ///   Gets or sets the stack frame of the exception.
-    /// </summary>
-    public StackFrame Frame { get; set; }
-
-    /// <summary>
-    ///   Creates a new <see cref="AssertionException"/>, given an optional message and inner exception.
-    /// </summary>
-    public AssertionException(string message = null, Exception inner = null) : base(message, inner)
-    {
-    }
-
-    public override string ToString()
-    {
-        if (Frame == null)
-            return Message;
-
-        string filename = Path.GetFileName(Frame.GetFileName()) ?? "<unknown file>";
-
-        return $"({filename} :: {Frame.GetFileLineNumber()}:{Frame.GetFileColumnNumber()}) {Message}";
-    }
-}
-#endregion
-
 /// <summary>
 ///   A simple class used for unit tests.
 /// </summary>
 [DebuggerNonUserCode]
 internal class Tests
 {
+    #region Tests
+    // ==================================================================================================================>>
+    // Insert your tests below ==========================================================================================>>
+    // ==================================================================================================================>>
+
+    [Test(Skip = true)]
+    public static void Template()
+    {
+    }
+    #endregion
+        
     #region Performing tests and utilities
     /// <summary>
     ///   Performs all tests declared in this class and in the additional classes that have been specified.
@@ -267,15 +211,71 @@ internal class Tests
         }
     }
     #endregion
+}
 
-    #region Tests
-    // ==================================================================================================================>>
-    // Insert your tests below ==========================================================================================>>
-    // ==================================================================================================================>>
+#region Classes
+/// <summary>
+///   Indicates that the marked method will be tested during unit tests.
+/// </summary>
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+public sealed class TestAttribute : Attribute
+{
+    /// <summary>
+    ///   If <see langword="true" /> and the method fails, all following tests will be skipped,
+    ///   and an error will be immediately shown.
+    /// </summary>
+    public bool IsFatal { get; set; } = false;
 
-    [Test(Skip = true)]
-    public static void Template()
+    /// <summary>
+    ///   If <see langword="true" />, the test will be considered failed unless it throws an exception.
+    /// </summary>
+    public bool ShouldFail { get; set; } = false;
+
+    /// <summary>
+    ///   If <see langword="true"/>, the test will be skipped.
+    /// </summary>
+    public bool Skip { get; set; } = false;
+
+    /// <summary>
+    ///   Gets the list of all the arguments to pass to the function when invoking it.
+    /// </summary>
+    public object[] Arguments { get; }
+
+    /// <summary>
+    ///   Indicates that the marked method will be tested during unit tests, providing the
+    ///   specified arguments.
+    /// </summary>
+    public TestAttribute(params object[] arguments)
+    {
+        Arguments = arguments;
+    }
+}
+
+/// <summary>
+///   Represents an exception encountered when an assertion proves to be false.
+/// </summary>
+public sealed class AssertionException : Exception
+{
+    /// <summary>
+    ///   Gets or sets the stack frame of the exception.
+    /// </summary>
+    public StackFrame Frame { get; set; }
+
+    /// <summary>
+    ///   Creates a new <see cref="AssertionException"/>, given an optional message and inner exception.
+    /// </summary>
+    public AssertionException(string message = null, Exception inner = null) : base(message, inner)
     {
     }
-    #endregion
+
+    public override string ToString()
+    {
+        if (Frame == null)
+            return Message;
+
+        string filename = Path.GetFileName(Frame.GetFileName()) ?? "<unknown file>";
+
+        return $"({filename} :: {Frame.GetFileLineNumber()}:{Frame.GetFileColumnNumber()}) {Message}";
+    }
 }
+#endregion
