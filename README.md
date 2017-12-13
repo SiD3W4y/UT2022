@@ -1,14 +1,14 @@
 # 🇬🇧󠁧󠁢󠁥󠁮󠁧󠁿 English
 Unit tests for the programming exercises given to the 2022 class @ EPITA.
 
-The [template](./Template.cs) file provides an easy way to create unit tests for a subject.
+The [template](./Template.cs#L15-L24) file provides an easy way to create unit tests for a subject.
 
 **Pull requests are welcome.**
 
 # 🇫🇷 French
 Unit tests pour les TPs donnés chaque semaine à la promo 2022 @ EPITA.
 
-Le fichier [template](./Template.cs) déclare des classes qui permettent de facilement créer des tests pour un sujet.
+Le fichier [template](./Template.cs#L15-L24) déclare des classes qui permettent de facilement créer des tests pour un sujet.
 
 **Les pull requests sont les bienvenues.**
 
