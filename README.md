@@ -3,14 +3,17 @@ Unit tests for the programming exercises given to the 2022 class @ EPITA.
 
 The [template](./Template.cs) file provides an easy way to create unit tests for a subject.
 
+**Pull requests are welcome.**
 
 # 🇫🇷 French
 Unit tests pour les TPs donnés chaque semaine à la promo 2022 @ EPITA.
 
 Le fichier [template](./Template.cs) déclare des classes qui permettent de facilement créer des tests pour un sujet.
 
-## Ex(e|a)mple
-### `Program.cs`
+**Les pull requests sont les bienvenues.**
+
+# Ex(e|a)mple
+#### `Program.cs`
 ```csharp
 public class Program
 {
@@ -46,7 +49,7 @@ public class Program
 }
 ```
 
-### Output:
+#### Output:
 ```
 Now testing Void BadMaths()
   Test successful.
