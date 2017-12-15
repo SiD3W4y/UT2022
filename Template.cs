@@ -23,7 +23,7 @@ internal class Tests
     }
     #endregion
 
-    void PrintSuccess()
+    static void PrintSuccess()
     {
     	Console.ForegroundColor = ConsoleColor.Green;
     	Console.WriteLine("  Test successful.");
