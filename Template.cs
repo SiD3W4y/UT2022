@@ -22,6 +22,15 @@ internal class Tests
     {
     }
     #endregion
+
+    private static void PrintSuccess()
+    {
+    	Console.ForegroundColor = ConsoleColor.Green;
+    	Console.WriteLine("  Test successful.");
+    	Console.WriteLine();
+    }
+
+
         
     #region Performing tests and utilities
     /// <summary>
@@ -69,13 +78,6 @@ internal class Tests
                 object instance = method.IsStatic ? null : obj;
                 bool forcedFail = false;
 
-                void PrintSuccess()
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("  Test successful.");
-                    Console.WriteLine();
-                }
-
                 try
                 {
                     method.Invoke(instance, attribute.Arguments);
@@ -98,8 +100,8 @@ internal class Tests
                 }
                 catch (Exception e)
                 {
-                    while (e is TargetInvocationException tie)
-                        e = tie.InnerException;
+                    while (e is TargetInvocationException)
+                        e = (e as TargetInvocationException).InnerException;
 
                     if (e is AssertionException)
                     {
