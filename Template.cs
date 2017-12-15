@@ -1,10 +1,11 @@
+// Source: https://github.com/6A/UT2022
+// ReSharper disable All
+
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-
-// ReSharper disable All
 
 /// <summary>
 ///   A simple class used for unit tests.
@@ -22,6 +23,56 @@ internal class Tests
     {
     }
     #endregion
+        
+    #region Performing tests and utilities
+    /// <summary>
+    ///   Returns the output of the given action in the standard output.
+    /// </summary>
+    public static string Output(Action action)
+    {
+        TextWriter originalWriter = Console.Out;
+        
+        using (StringWriter writer = new StringWriter())
+        {
+            Console.SetOut(writer);
+
+            try
+            {
+                action();
+            }
+            finally
+            {
+                Console.SetOut(originalWriter);
+            }
+
+            return writer.ToString();
+        }
+    }
+
+    /// <summary>
+    ///   Returns the output of the given action in the standard output,
+    ///   and sets <paramref name="value"/> to the return value of the action.
+    /// </summary>
+    public static string Output<T>(Func<T> action, out T value)
+    {
+        TextWriter originalWriter = Console.Out;
+        
+        using (StringWriter writer = new StringWriter())
+        {
+            Console.SetOut(writer);
+
+            try
+            {
+                value = action();
+            }
+            finally
+            {
+                Console.SetOut(originalWriter);
+            }
+
+            return writer.ToString();
+        }
+    }
 
     private static void PrintSuccess()
     {
@@ -29,10 +80,7 @@ internal class Tests
     	Console.WriteLine("  Test successful.");
     	Console.WriteLine();
     }
-
-
-        
-    #region Performing tests and utilities
+    
     /// <summary>
     ///   Performs all tests declared in this class and in the additional classes that have been specified.
     /// </summary>
@@ -51,7 +99,6 @@ internal class Tests
     public static void Perform(params object[] objects)
     {
         const BindingFlags ALL = BindingFlags.NonPublic | BindingFlags.Public;
-
 
         // execute them one by one
         int nbfails = 0,
